@@ -1,0 +1,413 @@
+@font-face {
+  font-family: "Gen Jyuu Gothic";
+  src: local("GenJyuuGothic-Medium"), url("assets/fonts/GenJyuuGothic-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gen Jyuu Gothic";
+  src: local("GenJyuuGothic-Bold"), url("assets/fonts/GenJyuuGothic-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DNF Bit Bit v2";
+  src: local("DNFBitBitv2"), url("assets/fonts/DNFBitBitv2.otf") format("opentype");
+  font-display: swap;
+}
+
+:root {
+  --ink-900: #141414;
+  --sky-top: #91d3ed;
+  --sky-bottom: #e4f3f8;
+  --dark-glass: rgba(21, 21, 21, 0.9);
+  --dark-border: rgba(255, 255, 255, 0.2);
+  --accent-count: #f7b437;
+
+  --meeting-border: #ffffff;
+  --meeting-bg: rgba(255, 255, 255, 0.8);
+  --key-border: #c4df41;
+  --key-bg: #edf8b8;
+  --win-border: #efc980;
+  --win-bg: #fff3ac;
+  --issue-border: #a689e6;
+  --issue-bg: #ddd2f6;
+
+  --font-date: "Saira", "Gen Jyuu Gothic", sans-serif;
+  --font-body: "Gen Jyuu Gothic", sans-serif;
+  --font-pixel: "DNF Bit Bit v2", monospace;
+
+  --ui-shadow: inset -4px -4px 8px 0 rgba(255, 255, 255, 0.1),
+    inset 4px 4px 12px 0 rgba(255, 255, 255, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background: var(--sky-bottom);
+  overflow-x: auto;
+  overflow-y: hidden;
+  line-height: normal;
+}
+
+p {
+  margin: 0;
+}
+
+/* ---------- Stage ---------- */
+/* The design is 11775 × 1080; --scale (set by script) fits its height to the viewport */
+:root {
+  --stage-w: 11775px;
+  --stage-h: 1080px;
+  --scale: 1;
+}
+
+.scroller {
+  width: calc(var(--stage-w) * var(--scale));
+  height: calc(var(--stage-h) * var(--scale));
+  overflow: hidden;
+}
+
+.stage {
+  position: relative;
+  width: var(--stage-w);
+  height: var(--stage-h);
+  overflow: hidden;
+  background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 64.682%);
+  transform: scale(var(--scale));
+  transform-origin: 0 0;
+}
+
+/* Fixed overlays, drawn in design coordinates and scaled like the stage */
+.hud {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  transform: scale(var(--scale));
+  transform-origin: 0 0;
+}
+
+.hud--team {
+  z-index: 2;
+}
+
+/* ---------- Glass surfaces (shared) ---------- */
+.glass {
+  position: relative;
+  border-style: solid;
+  isolation: isolate;
+}
+
+.glass::before,
+.glass::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.glass::before {
+  z-index: -1;
+  background: var(--surface);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.glass::after {
+  box-shadow: var(--ui-shadow);
+}
+
+/* ---------- Revision summary bar ---------- */
+.summary {
+  --surface: var(--dark-glass);
+  position: absolute;
+  left: 39px;
+  top: 24px;
+  display: flex;
+  align-items: center;
+  width: 627px;
+  height: 99px;
+  padding: 0 40px;
+  overflow: clip;
+  border: 1px solid var(--dark-border);
+  border-radius: 20px;
+}
+
+.summary__row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  white-space: nowrap;
+}
+
+.summary__title {
+  width: 96px;
+  font: 700 24px var(--font-body);
+  color: #fff;
+}
+
+.summary__divider {
+  position: relative;
+  align-self: stretch;
+  width: 0;
+  container-type: size;
+}
+
+.summary__divider img {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  display: block;
+  width: 100cqh;
+  max-width: none;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.stat__label {
+  font-family: var(--font-date);
+  font-weight: 700;
+  color: #fff;
+}
+
+.stat__label--zh {
+  font-family: var(--font-body);
+}
+
+.stat__value {
+  font-family: var(--font-pixel);
+  color: var(--accent-count);
+}
+
+.stat__value.is-bumped {
+  animation: bump 0.5s ease-out;
+}
+
+@keyframes bump {
+  0%   { transform: scale(1); }
+  30%  { transform: scale(1.6); color: #fff; }
+  100% { transform: scale(1); }
+}
+
+/* ---------- Timeline ---------- */
+.timeline {
+  position: absolute;
+  left: 42px;
+  top: 165px;
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__col {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.timeline__tags {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.timeline__tags--center {
+  align-items: center;
+}
+
+/* Days elapsed between meetings */
+.days {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 64px;
+  height: 64px;
+  border-radius: 10px;
+  font: 28px var(--font-pixel);
+  color: #fff;
+}
+
+/* Progress card */
+.card {
+  --surface: var(--meeting-bg);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  flex-shrink: 0;
+  padding: 8px 32px;
+  border-width: 2px;
+  border-color: var(--meeting-border);
+  border-radius: 12px;
+  color: var(--ink-900);
+  white-space: nowrap;
+}
+
+.card--key {
+  --surface: var(--key-bg);
+  border-color: var(--key-border);
+}
+
+.card--win {
+  --surface: var(--win-bg);
+  border-color: var(--win-border);
+  gap: 0;
+}
+
+.card--issue {
+  --surface: var(--issue-bg);
+  border-color: var(--issue-border);
+  gap: 0;
+}
+
+.card__title {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+  font: 700 28px var(--font-date);
+}
+
+.card__body {
+  margin: 0;
+  padding: 0;
+  font: 700 32px var(--font-body);
+}
+
+ul.card__body li {
+  margin-left: 48px;
+  list-style: disc;
+}
+
+/* Revision tag */
+.tag {
+  --surface: var(--dark-glass);
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 4px 20px;
+  border-width: 1px;
+  border-color: var(--dark-border);
+  border-radius: 4px;
+  font-size: 20px;
+  white-space: nowrap;
+}
+
+.tag__name {
+  font-family: var(--font-body);
+  font-weight: 700;
+  color: #fff;
+}
+
+.tag__count {
+  font-family: var(--font-pixel);
+  color: var(--accent-count);
+}
+
+.tag.is-counted .tag__count {
+  animation: bump 0.5s ease-out;
+}
+
+/* ---------- Ground ---------- */
+.ground {
+  position: absolute;
+  left: -306px;
+  top: 874px;
+  display: flex;
+  width: 2532px;
+  height: 323px;
+}
+
+.ground__block {
+  position: relative;
+  flex: none;
+  width: 844px;
+  height: 323px;
+}
+
+.tile {
+  position: absolute;
+  overflow: hidden;
+}
+
+.tile img {
+  position: absolute;
+  max-width: none;
+}
+
+.tile--1 { left: 561px; top: 7px;   width: 283px; height: 138px; }
+.tile--2 { left: 283px; top: 0;     width: 283px; height: 145px; }
+.tile--3 { left: 0;     top: 0;     width: 283px; height: 145px; }
+.tile--4 { left: 564px; top: 145px; width: 280px; height: 178px; }
+.tile--5 { left: 282px; top: 145px; width: 283px; height: 178px; }
+.tile--6 { left: 0;     top: 145px; width: 282px; height: 178px; }
+
+.tile--1 img { left: -523.32%; top: -182.69%; width: 698.59%; height: 756.68%; }
+.tile--2 img { left: -412.72%; top: -169.04%; width: 698.59%; height: 720.15%; }
+.tile--3 img { left: -298.23%; top: -169.04%; width: 698.59%; height: 720.15%; }
+.tile--4 img { left: -463.93%; top: -16.91%;  width: 706.07%; height: 586.64%; }
+.tile--5 img { left: -348.28%; top: -16.91%;  width: 698.59%; height: 586.64%; }
+.tile--6 img { left: -238.37%; top: -16.91%;  width: 701.06%; height: 586.64%; }
+
+/* ---------- Team (characters) ---------- */
+.team {
+  position: absolute; /* inside .hud: stays on the left and "walks" along the scrolling ground */
+  left: 49px;
+  top: 731px;
+  width: 781px;
+  height: 241px;
+}
+
+.team__sprite {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.team__sprite--shade {
+  left: 51px;
+  top: 29px;
+  width: 174px;
+  height: 168px;
+  mix-blend-mode: darken;
+}
+
+.team__sprite--cerebes { left: 0;     top: 103px; width: 81px;  height: 79px; }
+.team__sprite--sheep   { left: 210px; top: 47px;  width: 183px; height: 137px; }
+.team__sprite--beetle  { left: 393px; top: 43px;  width: 216px; height: 141px; }
+.team__sprite--yeti    { left: 580px; top: 0;     width: 201px; height: 184px; }
+
+.nametag {
+  position: absolute;
+  padding: 2px 8px;
+  background: rgba(0, 0, 0, 0.6);
+  font: 500 24px var(--font-body);
+  color: #fff;
+  white-space: nowrap;
+}

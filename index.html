@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JCO 結案</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@700&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- HUD layers stay fixed in the viewport while the stage scrolls -->
+  <div class="hud">
+    <!-- Revision counts -->
+    <section class="summary glass" aria-label="修改次數">
+      <div class="summary__row">
+        <p class="summary__title">修改次數</p>
+        <span class="summary__divider" aria-hidden="true"><img src="assets/divider.svg" width="60" height="1" alt=""></span>
+        <div class="stat"><p class="stat__label stat__label--zh">首頁</p><p class="stat__value" data-stat-value="home">0</p></div>
+        <span class="summary__divider" aria-hidden="true"><img src="assets/divider.svg" width="60" height="1" alt=""></span>
+        <div class="stat"><p class="stat__label">Vision</p><p class="stat__value" data-stat-value="vision">0</p></div>
+        <span class="summary__divider" aria-hidden="true"><img src="assets/divider.svg" width="60" height="1" alt=""></span>
+        <div class="stat"><p class="stat__label">Experience</p><p class="stat__value" data-stat-value="experience">0</p></div>
+        <span class="summary__divider" aria-hidden="true"><img src="assets/divider.svg" width="60" height="1" alt=""></span>
+        <div class="stat"><p class="stat__label">Research</p><p class="stat__value" data-stat-value="research">0</p></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="scroller">
+  <main class="stage">
+
+    <!-- Timeline -->
+    <ol class="timeline">
+      <li class="card card--key glass">
+        <p class="card__title"><span>0625</span><span>會議</span></p>
+        <ul class="card__body"><li>開案</li></ul>
+      </li>
+
+      <li class="days" aria-label="5 天後">5</li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0707</span><span>會議</span></p>
+          <ul class="card__body"><li>首頁四款提案</li><li>架構、內容都需要修改</li></ul>
+        </div>
+        <div class="tag glass" data-stat="home" data-count="1"><span class="tag__name">首頁</span><span class="tag__count">+1</span></div>
+        <div class="card card--win glass">
+          <p class="card__title">事蹟</p>
+          <p class="card__body">發想全部文案與素材</p>
+        </div>
+      </li>
+
+      <li class="days" aria-label="1 天後">1</li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0709</span><span>會議</span></p>
+          <ul class="card__body"><li>首頁 V5</li></ul>
+        </div>
+      </li>
+
+      <li class="days" aria-label="12 天後">12</li>
+
+      <li class="timeline__col">
+        <div class="card card--key glass">
+          <p class="card__title"><span>0728</span><span>會議</span></p>
+          <ul class="card__body">
+            <li>討論首頁 V5 + 內頁初稿</li>
+            <li>素材使用全 AI</li>
+            <li>因從「互動細胞」改為「JCO」頁面需要進行調整</li>
+            <li>Experience 內頁內容可簡化</li>
+          </ul>
+        </div>
+        <div class="timeline__tags">
+          <div class="tag glass" data-stat="home" data-count="1"><span class="tag__name">首頁</span><span class="tag__count">+1</span></div>
+          <div class="tag glass" data-stat="experience" data-count="1"><span class="tag__name">Experience 內頁</span><span class="tag__count">+1</span></div>
+        </div>
+        <div class="card card--issue glass">
+          <p class="card__title">問題</p>
+          <p class="card__body">約不到會議時間</p>
+        </div>
+        <div class="card card--win glass">
+          <p class="card__title">事蹟</p>
+          <ul class="card__body"><li>18 天全部初稿完成</li><li>全頁面概念通過</li></ul>
+        </div>
+      </li>
+
+      <li class="days" aria-label="9 天後">9</li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0811</span></p>
+          <ul class="card__body"><li>東輝提出技術影片可以試新題材</li><li>規劃後續時程</li></ul>
+        </div>
+        <div class="tag glass" data-stat="home" data-count="1"><span class="tag__name">首頁</span><span class="tag__count">+1</span></div>
+        <div class="card card--issue glass">
+          <p class="card__title">問題</p>
+          <ul class="card__body"><li>發現 AI 素材製作時間長</li><li>詢問東輝是否有可能協助產素材</li></ul>
+        </div>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0812</span><span>會議</span></p>
+          <ul class="card__body">
+            <li>全文案、Vision、製作時程討論</li>
+            <li>Neco 造型討論</li>
+            <li>Milk 提出多項修改建議</li>
+          </ul>
+        </div>
+        <div class="timeline__tags">
+          <div class="tag glass" data-stat="home" data-count="1"><span class="tag__name">首頁</span><span class="tag__count">+1</span></div>
+          <div class="tag glass" data-stat="vision" data-count="1"><span class="tag__name">Vision</span><span class="tag__count">+1</span></div>
+        </div>
+        <div class="card glass">
+          <p class="card__title"><span>提出時程規劃</span></p>
+          <ul class="card__body"><li>8月底 | 首頁完成、Vision 定稿</li><li>10月底 | 網站 1.0 上線</li></ul>
+        </div>
+        <div class="card card--win glass">
+          <p class="card__title">事蹟</p>
+          <ul class="card__body"><li>Neco 概念發想</li></ul>
+        </div>
+      </li>
+
+      <li class="days" aria-label="5 天後">5</li>
+
+      <li class="timeline__col">
+        <div class="card card--key glass">
+          <p class="card__title"><span>0820</span><span>會議</span></p>
+          <ul class="card__body">
+            <li>首頁影片用太空人版本</li>
+            <li>Neco 提案通過，可招募美術進隊</li>
+            <li>時程確認</li>
+          </ul>
+        </div>
+        <div class="card card--key glass">
+          <p class="card__title"><span>0820</span><span>時程規劃確認</span></p>
+          <ul class="card__body"><li>8月底 | 首頁完成、Vision 定稿</li><li>10月底 | 網站 1.0 上線</li></ul>
+        </div>
+      </li>
+
+      <li class="card glass">
+        <p class="card__title"><span>0821</span><span>會議</span></p>
+        <ul class="card__body"><li>和小刀討論 Neco 造型方向</li></ul>
+      </li>
+
+      <li class="card glass">
+        <p class="card__title"><span>0825</span><span>會議</span></p>
+        <ul class="card__body"><li>選出 3 種 Neco 造型做提案</li></ul>
+      </li>
+
+      <li class="card card--key glass">
+        <p class="card__title"><span>0827</span><span>會議</span></p>
+        <ul class="card__body"><li>Neco 造型定案</li></ul>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card card--key glass">
+          <p class="card__title"><span>0904</span><span>會議</span></p>
+          <ul class="card__body"><li>Neco 造型根據公仔調整</li></ul>
+        </div>
+        <div class="card card--win glass">
+          <p class="card__title">事蹟</p>
+          <ul class="card__body"><li>首頁完成部署</li><li>Vision 因 Neco 討論延後定稿</li></ul>
+        </div>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0909</span></p>
+          <ul class="card__body"><li>根據 0728 回饋調整 Experience 內頁</li></ul>
+        </div>
+        <div class="tag glass" data-stat="experience" data-count="1"><span class="tag__name">Experience 內頁</span><span class="tag__count">+1</span></div>
+      </li>
+
+      <li class="card card--win glass">
+        <p class="card__title">事蹟</p>
+        <ul class="card__body"><li>不用再先行和 Milk 確認網頁內容</li></ul>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0915</span></p>
+          <ul class="card__body"><li>Experience 定稿</li></ul>
+        </div>
+        <div class="card card--key glass">
+          <p class="card__title"><span>提出時程規劃</span></p>
+          <ul class="card__body"><li>11月底與12月底兩種方案</li><li>Joy 希望維持 10月底完成</li></ul>
+        </div>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0917</span></p>
+          <ul class="card__body"><li>兩位美術進隊</li></ul>
+        </div>
+        <div class="tag glass" data-stat="experience" data-count="1"><span class="tag__name">Experience 內頁</span><span class="tag__count">+1</span></div>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>0928~0930</span></p>
+          <ul class="card__body"><li>Vision 頁面嘗試後發現技術上有困難<br>需要更新版面</li></ul>
+        </div>
+        <div class="tag glass" data-stat="vision" data-count="1"><span class="tag__name">Vision</span><span class="tag__count">+1</span></div>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card card--win glass">
+          <p class="card__title">事蹟</p>
+          <ul class="card__body">
+            <li>製作素材清單</li>
+            <li>製作 AI 工具的 skill 給美術使用</li>
+            <li>教美術 AI 相關技巧</li>
+            <li>校正美術給的素材，包含人種構圖色調一致性等等<br>因我也是設計背景，能精準修改</li>
+          </ul>
+        </div>
+        <div class="timeline__tags timeline__tags--center">
+          <div class="tag glass" data-stat="vision" data-count="10"><span class="tag__name">Vision</span><span class="tag__count">+10</span></div>
+          <div class="tag glass" data-stat="experience" data-count="20"><span class="tag__name">Experience</span><span class="tag__count">+20</span></div>
+          <div class="tag glass" data-stat="research" data-count="5"><span class="tag__name">Research</span><span class="tag__count">+5</span></div>
+        </div>
+      </li>
+
+      <li class="card glass">
+        <p class="card__title"><span>1006</span></p>
+        <ul class="card__body"><li>Vision 頁面完成</li></ul>
+      </li>
+
+      <li class="card glass">
+        <p class="card__title"><span>1008</span></p>
+        <ul class="card__body"><li>Experience 頁面完成</li></ul>
+      </li>
+
+      <li class="card glass">
+        <p class="card__title"><span>1013</span></p>
+        <ul class="card__body"><li>Research 頁面完成</li></ul>
+      </li>
+
+      <li class="timeline__col">
+        <div class="card glass">
+          <p class="card__title"><span>1016</span></p>
+          <ul class="card__body"><li>全頁面完成</li></ul>
+        </div>
+        <div class="card card--win glass">
+          <p class="card__title">事蹟</p>
+          <ul class="card__body"><li>全頁面部署上線</li></ul>
+        </div>
+      </li>
+    </ol>
+
+    <!-- Ground -->
+    <div class="ground" aria-hidden="true">
+      <div class="ground__block">
+        <div class="tile tile--1"><img src="assets/dragon-road-tiles.png" alt=""></div>
+        <div class="tile tile--2"><img src="assets/dragon-road-tiles.png" alt=""></div>
+        <div class="tile tile--3"><img src="assets/dragon-road-tiles.png" alt=""></div>
+        <div class="tile tile--4"><img src="assets/dragon-road-tiles.png" alt=""></div>
+        <div class="tile tile--5"><img src="assets/dragon-road-tiles.png" alt=""></div>
+        <div class="tile tile--6"><img src="assets/dragon-road-tiles.png" alt=""></div>
+      </div>
+      <!-- more blocks are cloned in by script to cover the full width -->
+    </div>
+
+  </main>
+  </div>
+
+  <div class="hud hud--team">
+    <!-- Team -->
+    <section class="team" aria-label="團隊成員">
+      <img class="team__sprite team__sprite--shade" src="shade.gif" alt="">
+      <img class="team__sprite team__sprite--cerebes" src="jr-cerebes.gif" alt="">
+      <img class="team__sprite team__sprite--sheep" src="惡魔綿羊.gif" alt="">
+      <img class="team__sprite team__sprite--beetle" src="beetle.gif" alt="">
+      <img class="team__sprite team__sprite--yeti" src="jr-yeti.gif" alt="">
+      <span class="nametag" style="left:17px; top:201px">小刀</span>
+      <span class="nametag" style="left:121px; top:201px">竹碳</span>
+      <span class="nametag" style="left:260px; top:197px">Devin</span>
+      <span class="nametag" style="left:443px; top:201px">東輝</span>
+      <span class="nametag" style="left:625px; top:201px">Milk</span>
+    </section>
+  </div>
+
+  <script>
+    const stage = document.querySelector('.stage');
+    const DESIGN_HEIGHT = 1080;
+
+    // Fit the 1080px-tall design to the viewport height
+    function fit() {
+      document.documentElement.style.setProperty('--scale', window.innerHeight / DESIGN_HEIGHT);
+    }
+    fit();
+
+    // Ground: repeat the tile block across the whole stage
+    const ground = document.querySelector('.ground');
+    const block = ground.querySelector('.ground__block');
+    const blocksNeeded = Math.ceil((stage.offsetWidth - ground.offsetLeft) / block.offsetWidth);
+    for (let i = 1; i < blocksNeeded; i++) ground.appendChild(block.cloneNode(true));
+    ground.style.width = `${blocksNeeded * block.offsetWidth}px`;
+
+    // Vertical wheel scrolls the timeline horizontally
+    window.addEventListener('wheel', (e) => {
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        window.scrollBy({ left: e.deltaY });
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    // Revision counters: a "+N" tag adds N once it scrolls past the trigger line
+    const TRIGGER = 0.7; // fraction of viewport width
+    const tags = [...document.querySelectorAll('.tag[data-stat]')];
+    const values = Object.fromEntries(
+      [...document.querySelectorAll('[data-stat-value]')].map((el) => [el.dataset.statValue, el])
+    );
+    let tagX = [];
+
+    function measure() {
+      tagX = tags.map((tag) => tag.getBoundingClientRect().left + window.scrollX);
+    }
+
+    function update() {
+      const atEnd = window.scrollX + window.innerWidth >= document.documentElement.scrollWidth - 2;
+      const line = atEnd ? Infinity : window.scrollX + window.innerWidth * TRIGGER;
+      const counts = Object.fromEntries(Object.keys(values).map((k) => [k, 0]));
+
+      tags.forEach((tag, i) => {
+        const counted = tagX[i] < line;
+        tag.classList.toggle('is-counted', counted);
+        if (counted) counts[tag.dataset.stat] += Number(tag.dataset.count) || 1;
+      });
+
+      for (const [key, el] of Object.entries(values)) {
+        const prev = Number(el.textContent);
+        if (prev === counts[key]) continue;
+        el.textContent = counts[key];
+        if (counts[key] > prev) {
+          el.classList.remove('is-bumped');
+          void el.offsetWidth; // restart animation
+          el.classList.add('is-bumped');
+        }
+      }
+    }
+
+    measure();
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', () => { fit(); measure(); update(); });
+    document.fonts.ready.then(() => { measure(); update(); });
+  </script>
+</body>
+</html>
