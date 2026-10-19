@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JCO 結案 · 總結</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-summary">
+  <div class="hud hud--right">
+    <!-- Report sections: pinned to the right edge of the viewport -->
+    <nav class="sections" aria-label="報告章節">
+      <a class="sections__item glass" href="index.html">歷程</a>
+      <a class="sections__item is-current glass" href="summary.html" aria-current="page">總結</a>
+      <a class="sections__item glass" href="reflection.html">反思與計畫</a>
+      <a class="sections__item glass" href="role.html">角色定位</a>
+    </nav>
+  </div>
+
+  <div class="scroller">
+  <main class="stage stage--sky">
+    <div class="ground" aria-hidden="true"></div>
+
+    <!-- Site highlights -->
+    <section class="sheet sheet--highlights" data-step aria-labelledby="highlights-title">
+      <header class="sheet__head sheet__head--black sheet__head--split">
+        <div class="sheet__brand">
+          <span class="logo"><img src="assets/jco-logo.svg" width="138.971" height="47.6665" alt="JCO"></span>
+          <h2 class="sheet__title" id="highlights-title">網站亮點</h2>
+        </div>
+        <p class="days-badge glass"><span class="pixel-outline" data-text="70">70</span><span class="pixel-outline days-badge__unit" data-text="Days">Days</span></p>
+      </header>
+      <div class="sheet__body sheet__body--row">
+        <ul class="features features--wide">
+          <li class="feature">
+            <img class="feature__icon" src="assets/icons/sparkle.svg" width="40" height="40" alt="">
+            <div class="feature__text"><p class="feature__name">全客製化版面與素材</p></div>
+          </li>
+          <li class="feature feature--sub">
+            <img class="feature__icon" src="assets/icons/sparkle.svg" width="40" height="40" alt="">
+            <div class="feature__text">
+              <p class="feature__name">全客製化動態效果</p>
+              <p class="feature__note">反白、載入動態、進場動態、滾動動態、互動動態......</p>
+            </div>
+          </li>
+          <li class="feature feature--auto">
+            <img class="feature__icon" src="assets/icons/sparkle.svg" width="40" height="40" alt="">
+            <div class="feature__text">
+              <p class="feature__name">效能優化</p>
+              <p class="feature__note">載入速度、滾動順暢度、圖片預先載入......</p>
+            </div>
+          </li>
+        </ul>
+        <ul class="features">
+          <li class="feature feature--center">
+            <img class="feature__icon" src="assets/icons/sparkle.svg" width="40" height="40" alt="">
+            <div class="feature__text"><p class="feature__name">已建立多語系結構備用</p></div>
+          </li>
+          <li class="feature feature--sub">
+            <img class="feature__icon" src="assets/icons/sparkle.svg" width="40" height="40" alt="">
+            <div class="feature__text">
+              <p class="feature__name">Neco</p>
+              <p class="feature__note">角色設定、服裝、動畫</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+  </div>
+
+  <script src="stage.js"></script>
+</body>
+</html>

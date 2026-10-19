@@ -67,9 +67,10 @@ p {
 }
 
 /* ---------- Stage ---------- */
-/* The design is 13767 × 1080; --scale (set by script) fits its height to the viewport */
+/* 1080px tall; --scale (set by script) fits its height to the viewport.
+   歷程 overrides --stage-w with the timeline length (index.html) */
 :root {
-  --stage-w: 13767px;
+  --stage-w: 14171px;
   --stage-h: 1080px;
   --scale: 1;
 }
@@ -466,14 +467,18 @@ ul.card__body li {
 .nametag--dong   { left: 443px; top: 201px; }
 .nametag--milk   { left: 625px; top: 201px; }
 
-/* ==================== 反思與嘗試 (reflection.html) ==================== */
-/* Two screens, each one viewport wide (in design px: 100dvw ÷ --scale) */
-.page-reflection {
+/* ==================== Screen-paged pages (reflection.html, role.html) ==================== */
+/* Each .screen is one viewport wide (in design px: 100dvw ÷ --scale) */
+.page-reflection,
+.page-role {
   --screen-w: calc(100dvw / var(--scale));
-  --stage-w: calc(var(--screen-w) * 2);
 }
 
-.page-reflection .stage {
+.page-reflection { --stage-w: calc(var(--screen-w) * 2); }
+.page-role       { --stage-w: calc(var(--screen-w) * 3); }
+
+.page-reflection .stage,
+.page-role .stage {
   display: flex;
 }
 
@@ -493,12 +498,29 @@ ul.card__body li {
   transform-origin: 0 0;
 }
 
+/* Content centred horizontally on its screen */
+.screen__content--center {
+  left: 50%;
+  translate: -50% 0;
+  transform-origin: 50% 0;
+}
+
+.page-role .screen__content--center { top: 162px; }
+
+/* …and centred vertically too */
+.page-role .screen__content--middle {
+  top: 50%;
+  translate: -50% -50%;
+  transform-origin: 50% 50%;
+}
+
 /* "Stage 1 : JCO" headings.
    The element draws a 2px black outline; ::after lays the gradient fill on top. */
 .stage-title {
   position: absolute;
-  left: 0;
+  left: 50%; /* centred over the panels */
   top: 0;
+  translate: -50% 0;
   margin: 0;
   font: 400 100px var(--font-pixel);
   letter-spacing: 2px;
@@ -519,7 +541,7 @@ ul.card__body li {
 }
 
 .stage-title--jco {
-  --title-fill: linear-gradient(172.98deg, #f89955 37.442%, #eb8034 80.428%);
+  --title-fill: linear-gradient(172.98deg, #f9cd4b 37.442%, #f9b34b 80.428%);
 }
 
 .stage-title--tcg {
@@ -546,7 +568,8 @@ ul.card__body li {
   color: #fff;
 }
 
-.panel--mindset { height: 484px; }
+/* Mindset opens the 歷程 timeline */
+.timeline > .panel { flex-shrink: 0; }
 
 .panel--issue {
   --surface: #4f36a7;
@@ -602,4 +625,366 @@ ul.card__body li {
   width: 100%;
   height: 1px;
   margin-top: -1px;
+}
+
+/* ==================== Shared report sheets (summary.html, role.html) ==================== */
+/* 總結 is exactly one screen wide (in design px: 100dvw ÷ --scale), so it never scrolls */
+.page-summary { --stage-w: calc(100dvw / var(--scale)); }
+
+/* Card with a coloured header strip and a white body */
+.sheet {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  overflow: clip;
+  border: 2px solid #191919;
+  border-radius: 20px;
+  color: var(--ink-900);
+}
+
+.sheet__head {
+  display: flex;
+  align-items: center;
+  padding: 40px;
+}
+
+.sheet__head--dark,
+.sheet__head--black,
+.sheet__head--grey {
+  padding: 20px 40px;
+  background: #15171c;
+}
+
+.sheet__head--black { background: #181818; }
+.sheet__head--grey  { background: #262626; }
+
+.sheet__head--split { justify-content: space-between; }
+
+.sheet__title {
+  margin: 0;
+  font: 900 48px var(--font-date);
+  color: #fff;
+  white-space: nowrap;
+}
+
+.sheet__title--xb { font-weight: 800; }
+.sheet__title--sm { font-size: 40px; }
+
+.sheet__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 40px;
+  background: #fff;
+}
+
+.sheet__body--row {
+  flex-direction: row;
+  gap: 70px;
+}
+
+/* 1px rule drawn just above a zero-height slot, as in the design */
+.rule {
+  display: block;
+  margin-top: -1px;
+}
+
+/* …or above a 1px slot */
+.rule--px { margin-bottom: 1px; }
+
+/* Pixel-font text with a dark outline: the element draws the stroke, ::after the fill */
+.pixel-outline {
+  position: relative;
+  font-family: var(--font-pixel);
+  color: #000;
+  -webkit-text-stroke: var(--outline, 4px) #000;
+  white-space: nowrap;
+}
+
+.pixel-outline::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: var(--fill);
+  -webkit-text-stroke: 0;
+}
+
+/* ==================== 總結 (summary.html) ==================== */
+.sheet--highlights {
+  left: 50%;
+  top: 162px;
+  translate: -50% 0; /* centred on the screen */
+  width: 1411px;
+  height: 688px;
+}
+
+.sheet--highlights .sheet__body {
+  flex: 1 0 0;
+  padding: 60px 40px;
+}
+
+.sheet__brand {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.logo {
+  position: relative;
+  flex: none;
+  width: 140px;
+  height: 49.149px;
+}
+
+.logo img {
+  position: absolute;
+  left: 0;
+  top: 0.17%;
+}
+
+/* "70 Days" */
+.days-badge {
+  --surface: #f0eec2;
+  --fill: #c9ec48;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 20px;
+  border: 1px solid #ac9f39;
+  border-radius: 20px;
+  font-size: 56px;
+  letter-spacing: 1.12px;
+}
+
+.days-badge__unit {
+  --outline: 3px;
+  font-size: 28px;
+  letter-spacing: 0.56px;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.features--wide { width: 619px; }
+
+/* Fixed row heights as in the design; the 40px text overflows them slightly */
+.feature {
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+  height: 48px;
+}
+
+.feature--sub  { height: 88px; }
+.feature--auto { height: auto; }
+
+.feature__icon {
+  display: block;
+  flex: none;
+  margin-top: 4px;
+}
+
+.feature--center { align-items: center; }
+.feature--center .feature__icon { margin-top: 0; }
+
+.feature__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  justify-content: center;
+  white-space: nowrap;
+}
+
+.feature__name { font: 700 40px var(--font-body); }
+.feature__note { font: 500 24px var(--font-body); }
+
+/* ==================== 歷程 (index.html): last timeline item ==================== */
+.sheet--durations {
+  position: relative; /* a timeline item, not placed on the stage */
+  flex-shrink: 0;
+  width: 483px;
+}
+
+.duration {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font: 700 28px var(--font-date);
+  color: #000;
+  white-space: nowrap;
+}
+
+/* ==================== 角色定位 (role.html) ==================== */
+/* Placed by their .screen__content rather than on the stage */
+.sheet--compare,
+.sheet--company {
+  position: relative;
+}
+
+.sheet--compare { width: 1187px; }
+.sheet--company { width: 598px; }
+
+.page-role .screen__content--company { top: 210px; }
+
+/* Circles sized by how much each value matters */
+.values {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.values__item {
+  display: flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  padding: 10px;
+  border: 1px solid #000;
+  border-radius: 9999px;
+  background: #fff;
+  font: 700 20px var(--font-body);
+  white-space: nowrap;
+}
+
+.values__item--md { width: 120px; height: 120px; }
+.values__item--lg { width: 160px; height: 160px; }
+
+.compare-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.compare-row__label {
+  flex: none;
+  width: 240px;
+  margin: 0;
+  font: 500 24px var(--font-body);
+}
+
+.compare-row__head {
+  flex: 1 0 0;
+  min-width: 1px;
+}
+
+.compare-row__cell {
+  display: flex;
+  flex: 1 0 0;
+  gap: 8px;
+  align-items: center;
+  min-width: 1px;
+  margin: 0;
+  font: 500 24px var(--font-body);
+  white-space: nowrap;
+}
+
+.compare-row__cell img {
+  display: block;
+  flex: none;
+}
+
+/* Company perk: label + centred tick / cross */
+.perk {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  font: 700 24px var(--font-body);
+  white-space: nowrap;
+}
+
+.perk__label { flex: 1 0 0; }
+
+.perk__mark {
+  display: flex;
+  flex: none;
+  justify-content: center;
+  width: 120px;
+}
+
+.perk__mark img { display: block; }
+
+/* Job title cards: current → arrow → proposed */
+.jobs {
+  display: flex;
+  gap: 44px;
+  align-items: flex-start;
+}
+
+.job {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  gap: 24px;
+  width: 683px;
+  padding: 40px;
+  border: 1px solid #000;
+  border-radius: 40px;
+  color: #000;
+}
+
+.job--current { background: rgba(255, 255, 255, 0.4); }
+.job--next    { background: #fff; }
+
+.job__head {
+  display: flex;
+  flex-direction: column;
+  height: 107px;
+}
+
+.job__title {
+  margin: 0;
+  font: 700 40px var(--font-date);
+}
+
+.job__en {
+  font: 700 28px var(--font-date);
+  color: var(--ink-900);
+}
+
+.job--next .job__en { color: #5e37d6; }
+
+.job__block {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.job__block--pay { width: 165px; }
+
+.job__label {
+  margin: 0;
+  font: 700 28px var(--font-date);
+  white-space: nowrap;
+}
+
+.job__list {
+  margin: 0;
+  padding: 0;
+  font: 500 24px var(--font-date);
+}
+
+.job__list li { margin-left: 36px; }
+
+.job__text { font: 500 24px var(--font-date); }
+
+.job__pay { font: 700 40px var(--font-date); }
+
+/* Arrow between the two job cards, centred on y = 540 (the cards start at 162) */
+.job-arrow {
+  display: block;
+  flex: none;
+  margin-top: 366.453px;
 }

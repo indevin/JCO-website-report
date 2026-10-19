@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>JCO 結案 · 角色定位</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@500;600;700;800;900&display=swap">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-role" data-paging="sections">
+  <div class="hud hud--right">
+    <!-- Report sections: pinned to the right edge of the viewport -->
+    <nav class="sections" aria-label="報告章節">
+      <a class="sections__item glass" href="index.html">歷程</a>
+      <a class="sections__item glass" href="summary.html">總結</a>
+      <a class="sections__item glass" href="reflection.html">反思與計畫</a>
+      <a class="sections__item is-current glass" href="role.html" aria-current="page">角色定位</a>
+    </nav>
+  </div>
+
+  <div class="scroller">
+  <main class="stage stage--sky">
+    <div class="ground" aria-hidden="true"></div>
+
+    <!-- Each section fills one screen; the wheel and ← / → jump between them (stage.js) -->
+
+    <!-- Me vs. an agency / design studio: centred both ways -->
+    <section class="screen" data-step aria-label="Me 與外包或設計公司">
+    <div class="screen__content screen__content--center screen__content--middle">
+        <section class="sheet sheet--compare" aria-label="Me 與外包或設計公司比較">
+          <header class="sheet__head sheet__head--dark compare-row">
+            <span class="compare-row__label"></span>
+            <h2 class="sheet__title sheet__title--xb compare-row__head">Me</h2>
+            <h2 class="sheet__title sheet__title--xb compare-row__head">外包或設計公司</h2>
+          </header>
+          <div class="sheet__body">
+            <div class="compare-row">
+              <p class="compare-row__label">修改次數</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">無限次修改</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">修改 3 次以上要收費</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">排程</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">充滿彈性，可隨時切換專案</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">排程根據合約執行</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">窗口</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">可自行主導專案</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">需要人力和對方討論、開會、修改</p>
+            </div>
+            <img class="rule" src="assets/icons/rule-1103.svg" width="1103" height="1" alt="">
+            <div class="compare-row">
+              <p class="compare-row__label">文案內容</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">配合團隊，建立策略、內容</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">需自行提供，可付費買內容規劃</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">架構</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">理解品牌後進行規劃</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">提供常見規劃建議</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">圖片與影片</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">全客製化生成</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">使用圖庫或 AI，額外計費</p>
+            </div>
+            <img class="rule" src="assets/icons/rule-1103.svg" width="1103" height="1" alt="">
+            <div class="compare-row">
+              <p class="compare-row__label">視覺與動態品質</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">極高品質，細膩動態效果</p>
+              <p class="compare-row__cell"><img src="assets/icons/question.svg" width="40" height="40" alt="">看運氣，取決於設計師</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">UX 品質</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">重視使用者體驗</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">多數以視覺層面為主</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">RWD 響應式設計</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">4 常見尺寸精細調整</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">不跑版即可</p>
+            </div>
+            <img class="rule" src="assets/icons/rule-1103.svg" width="1103" height="1" alt="">
+            <div class="compare-row">
+              <p class="compare-row__label">累積對品牌的理解</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">有</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">沒有</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">前端技能</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">會</p>
+              <p class="compare-row__cell"><img src="assets/icons/question.svg" width="40" height="40" alt="">外包不一定，設計公司會</p>
+            </div>
+            <div class="compare-row">
+              <p class="compare-row__label">AI 技能</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">會</p>
+              <p class="compare-row__cell"><img src="assets/icons/question.svg" width="40" height="40" alt="">不一定</p>
+            </div>
+          </div>
+        </section>
+    </div>
+    </section>
+
+    <!-- What the company offers -->
+    <section class="screen" data-step aria-label="公司">
+    <div class="screen__content screen__content--center screen__content--company">
+      <section class="sheet sheet--company" aria-labelledby="company-title">
+        <header class="sheet__head sheet__head--dark">
+          <h2 class="sheet__title sheet__title--xb" id="company-title">公司</h2>
+        </header>
+        <div class="sheet__body">
+          <!-- What matters most, biggest first -->
+          <ul class="values" aria-label="重視的事">
+            <li class="values__item values__item--lg">自主性</li>
+            <li class="values__item values__item--md">使命感</li>
+            <li class="values__item">薪水</li>
+            <li class="values__item">成長性</li>
+          </ul>
+          <p class="perk"><span class="perk__label">參與更多初期定義的部分</span><span class="perk__mark"><img src="assets/icons/o.svg" width="40" height="40" alt="有"></span></p>
+          <p class="perk"><span class="perk__label">同職能夥伴</span><span class="perk__mark"><img src="assets/icons/x.svg" width="40" height="40" alt="沒有"></span></p>
+          <p class="perk"><span class="perk__label">同職能前輩</span><span class="perk__mark"><img src="assets/icons/x.svg" width="40" height="40" alt="沒有"></span></p>
+        </div>
+      </section>
+    </div>
+    </section>
+
+    <!-- Current title → proposed title -->
+    <section class="screen" data-step aria-label="職稱">
+    <div class="screen__content screen__content--center">
+    <div class="jobs">
+      <article class="job job--current">
+        <header class="job__head">
+          <h2 class="job__title">網頁視覺設計師</h2>
+          <p class="job__en">Web Visual Designer</p>
+        </header>
+        <img class="rule" src="assets/icons/rule-601.svg" width="601" height="1" alt="">
+        <section class="job__block">
+          <h3 class="job__label">職能</h3>
+          <ol class="job__list">
+            <li>熟HTML、CSS語法</li>
+            <li>網頁設計、動態表現、插畫、視覺設計概念強者</li>
+          </ol>
+        </section>
+        <section class="job__block">
+          <h3 class="job__label">工作內容</h3>
+          <p class="job__text">負責企業網頁與產品的前端設計開發及維護<br>製作出符合品牌形象的網站視覺。</p>
+        </section>
+        <img class="rule" src="assets/icons/rule-601.svg" width="601" height="1" alt="">
+        <section class="job__block job__block--pay">
+          <h3 class="job__label">薪資</h3>
+          <p class="job__pay">$45,000</p>
+        </section>
+      </article>
+
+      <img class="job-arrow" src="assets/icons/arrow.svg" width="62" height="23.094" alt="轉為">
+
+      <article class="job job--next">
+        <header class="job__head">
+          <h2 class="job__title">數位體驗設計師</h2>
+          <p class="job__en">Digital Designer</p>
+        </header>
+        <img class="rule" src="assets/icons/rule-601.svg" width="601" height="1" alt="">
+        <section class="job__block">
+          <h3 class="job__label">職能</h3>
+          <ol class="job__list">
+            <li>熟HTML、CSS語法</li>
+            <li>網頁設計、動態表現、插畫、視覺設計概念強者</li>
+          </ol>
+        </section>
+        <section class="job__block">
+          <h3 class="job__label">工作內容</h3>
+          <p class="job__text">1. 網站製作，包含企劃、設計、前端<br>2. 公司簡報模板製作<br>3. 開發內部 AI 工具<br>4. 數位應用相關設計</p>
+        </section>
+        <img class="rule" src="assets/icons/rule-601.svg" width="601" height="1" alt="">
+        <section class="job__block job__block--pay">
+          <h3 class="job__label">薪資</h3>
+          <p class="job__pay">$55,000</p>
+        </section>
+      </article>
+    </div>
+    </div>
+    </section>
+  </main>
+  </div>
+
+  <script src="stage.js"></script>
+  <script>
+    // Shrink a screen's content when it is wider than the screen.
+    // Vertically centred content also shrinks to keep the same gap above and below
+    // as the section nav needs, so the nav never covers it.
+    const EDGE = 40;    // design px between the screen edge and the content
+    const NAV_GAP = 20; // design px between the section nav and the content
+    const nav = document.querySelector('.sections');
+    const contents = [...document.querySelectorAll('.screen__content')];
+
+    function fitScreens() {
+      const screenW = window.innerWidth / scale();
+      const clearTop = nav.offsetTop + nav.offsetHeight + NAV_GAP;
+      contents.forEach((el) => {
+        let fit = (screenW - EDGE * 2) / el.offsetWidth;
+        if (el.classList.contains('screen__content--middle')) {
+          fit = Math.min(fit, (DESIGN_HEIGHT - clearTop * 2) / el.offsetHeight);
+        }
+        el.style.setProperty('--fit', Math.min(1, fit));
+      });
+    }
+
+    fitScreens();
+    window.addEventListener('resize', fitScreens);
+    document.fonts.ready.then(fitScreens);
+  </script>
+</body>
+</html>

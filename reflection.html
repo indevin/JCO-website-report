@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>JCO 結案 · 反思與嘗試</title>
+  <title>JCO 結案 · 反思與計畫</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Saira:wght@600;700;900&display=swap">
@@ -14,9 +14,9 @@
     <!-- Report sections: pinned to the right edge of the viewport -->
     <nav class="sections" aria-label="報告章節">
       <a class="sections__item glass" href="index.html">歷程</a>
-      <a class="sections__item is-current glass" href="reflection.html" aria-current="page">反思與嘗試</a>
-      <a class="sections__item glass" href="#">外包比較</a>
-      <a class="sections__item glass" href="#">期望</a>
+      <a class="sections__item glass" href="summary.html">總結</a>
+      <a class="sections__item is-current glass" href="reflection.html" aria-current="page">反思與計畫</a>
+      <a class="sections__item glass" href="role.html">角色定位</a>
     </nav>
   </div>
 
@@ -26,20 +26,9 @@
 
     <!-- Each stage fills one screen; the wheel and ← / → jump between them (stage.js) -->
     <section class="screen" data-step aria-label="Stage 1 : JCO">
-    <div class="screen__content">
+    <div class="screen__content screen__content--center">
     <h1 class="stage-title stage-title--jco" data-text="Stage 1 : JCO">Stage 1 : JCO</h1>
     <div class="panels">
-      <section class="panel panel--mindset glass">
-        <h2 class="panel__title">Mindset</h2>
-        <div class="panel__list">
-          <p class="panel__item"><span class="panel__num">1</span>需要自行蒐集公司資料與素材</p>
-          <img class="panel__rule" src="assets/divider.svg" width="60" height="1" alt="">
-          <p class="panel__item"><span class="panel__num">2</span>尚未建立默契，需要先出精緻一點的設計稿<br>用潦草的草稿討論，可能會被質疑</p>
-          <img class="panel__rule" src="assets/divider.svg" width="60" height="1" alt="">
-          <p class="panel__item"><span class="panel__num">3</span>要做出對標 Apple 等級的官網</p>
-        </div>
-      </section>
-
       <section class="panel panel--issue glass">
         <h2 class="panel__title">問題</h2>
         <div class="panel__list">
@@ -69,13 +58,13 @@
     </section>
 
     <section class="screen" data-step aria-label="Stage 2 : TCG">
-    <div class="screen__content">
+    <div class="screen__content screen__content--center">
     <h1 class="stage-title stage-title--tcg" data-text="Stage 2 : TCG">Stage 2 : TCG</h1>
     <div class="panels">
       <section class="panel panel--goal glass">
         <h2 class="panel__title">目標</h2>
         <div class="panel__list">
-          <p class="panel__item"><span class="panel__num">1</span>最初就要團體討論，確認目標</p>
+          <p class="panel__item"><span class="panel__num">1</span>最初就進行團體討論，確認目標與時程共識</p>
           <img class="panel__rule" src="assets/divider.svg" width="60" height="1" alt="">
           <p class="panel__item"><span class="panel__num">2</span>先定下 V1 的 Deadline，進行敏捷開發，<br>完成所有頁面到 V1，再開始下一輪優化</p>
           <img class="panel__rule" src="assets/divider.svg" width="60" height="1" alt="">
@@ -90,14 +79,22 @@
 
   <script src="stage.js"></script>
   <script>
-    // Shrink a screen's content when it is wider than the screen (e.g. Stage 1 on a 16:9 display)
+    // Shrink a screen's content when it is wider than the screen (e.g. Stage 1 on a 16:9 display),
+    // or when its centred title would run under the section nav.
     const SCREEN_PADDING = 75; // design px on each side
+    const NAV_GAP = 20;        // design px between the title and the nav
+    const nav = document.querySelector('.sections');
     const contents = [...document.querySelectorAll('.screen__content')];
 
     function fitScreens() {
       const screenW = window.innerWidth / scale();
+      const navLeft = screenW - parseFloat(getComputedStyle(nav).right) - nav.offsetWidth;
       contents.forEach((el) => {
-        el.style.setProperty('--fit', Math.min(1, (screenW - SCREEN_PADDING * 2) / el.offsetWidth));
+        const title = el.querySelector('.stage-title');
+        const fitWidth = (screenW - SCREEN_PADDING * 2) / el.offsetWidth;
+        // The title is centred on the screen, so its right edge sits half its width past the middle
+        const fitNav = title ? (navLeft - NAV_GAP - screenW / 2) * 2 / title.offsetWidth : 1;
+        el.style.setProperty('--fit', Math.min(1, fitWidth, fitNav));
       });
     }
 
