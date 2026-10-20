@@ -308,6 +308,16 @@ p {
 
 .timeline__col--loose { gap: 40px; }
 
+/* A day with too much for one column: two stacks side by side, so it stays above the ground */
+.timeline__col--split { flex-direction: row; }
+
+.timeline__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
 /* Consequence note under a card: red warning sign + one line */
 .warn {
   display: flex;
