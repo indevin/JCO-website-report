@@ -14,8 +14,8 @@
     <!-- Report sections: pinned to the right edge of the viewport -->
     <nav class="sections" aria-label="報告章節">
       <a class="sections__item glass" href="index.html">歷程</a>
-      <a class="sections__item glass" href="summary.html">總結</a>
       <a class="sections__item glass" href="reflection.html">反思與計畫</a>
+      <a class="sections__item glass" href="summary.html">總結與比較</a>
       <a class="sections__item is-current glass" href="role.html" aria-current="page">角色定位</a>
     </nav>
   </div>
@@ -32,7 +32,7 @@
         <section class="sheet sheet--compare" aria-label="Me 與外包或設計公司比較">
           <header class="sheet__head sheet__head--dark compare-row">
             <span class="compare-row__label"></span>
-            <h2 class="sheet__title sheet__title--xb compare-row__head">Me</h2>
+            <h2 class="sheet__title sheet__title--xb compare-row__head compare-row__head--me">Me</h2>
             <h2 class="sheet__title sheet__title--xb compare-row__head">外包或設計公司</h2>
           </header>
           <div class="sheet__body">
@@ -42,14 +42,19 @@
               <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">修改 3 次以上要收費</p>
             </div>
             <div class="compare-row">
+              <p class="compare-row__label">維護</p>
+              <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">無限維護</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">另外簽合約與收費</p>
+            </div>
+            <div class="compare-row">
               <p class="compare-row__label">排程</p>
               <p class="compare-row__cell"><img src="assets/icons/smile.svg" width="40" height="40" alt="">充滿彈性，可隨時切換專案</p>
-              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">排程根據合約執行</p>
+              <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">排程根據合約執行，若有調整可能延後</p>
             </div>
             <div class="compare-row">
               <p class="compare-row__label">窗口</p>
               <p class="compare-row__cell"><img src="assets/icons/o.svg" width="40" height="40" alt="">可自行主導專案</p>
-              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">需要人力和對方討論、開會、修改</p>
+              <p class="compare-row__cell"><img src="assets/icons/x.svg" width="40" height="40" alt="">需要有概念的人和對方討論、開會、修改</p>
             </div>
             <img class="rule" src="assets/icons/rule-1103.svg" width="1103" height="1" alt="">
             <div class="compare-row">
@@ -104,24 +109,57 @@
     </div>
     </section>
 
-    <!-- What the company offers -->
-    <section class="screen" data-step aria-label="公司">
-    <div class="screen__content screen__content--center screen__content--company">
-      <section class="sheet sheet--company" aria-labelledby="company-title">
+    <!-- Contributions: the four disciplines in workflow order, with PM running under all of them -->
+    <section class="screen" data-step aria-label="貢獻">
+    <div class="screen__content screen__content--center screen__content--duties">
+      <section class="sheet sheet--duties" aria-labelledby="duties-title">
         <header class="sheet__head sheet__head--dark">
-          <h2 class="sheet__title sheet__title--xb" id="company-title">公司</h2>
+          <h2 class="sheet__title sheet__title--xb" id="duties-title">貢獻</h2>
         </header>
         <div class="sheet__body">
-          <!-- What matters most, biggest first -->
-          <ul class="values" aria-label="重視的事">
-            <li class="values__item values__item--lg">自主性</li>
-            <li class="values__item values__item--md">使命感</li>
-            <li class="values__item">薪水</li>
-            <li class="values__item">成長性</li>
-          </ul>
-          <p class="perk"><span class="perk__label">參與更多初期定義的部分</span><span class="perk__mark"><img src="assets/icons/o.svg" width="40" height="40" alt="有"></span></p>
-          <p class="perk"><span class="perk__label">同職能夥伴</span><span class="perk__mark"><img src="assets/icons/x.svg" width="40" height="40" alt="沒有"></span></p>
-          <p class="perk"><span class="perk__label">同職能前輩</span><span class="perk__mark"><img src="assets/icons/x.svg" width="40" height="40" alt="沒有"></span></p>
+          <div class="duties">
+            <section class="duty duty--brand">
+              <h3 class="duty__label">品牌</h3>
+              <ul class="duty__list">
+                <li>統一公司對外論述</li>
+                <li>整理全專案資源庫</li>
+                <li>提案公司 IP：Neco</li>
+              </ul>
+            </section>
+            <section class="duty duty--plan">
+              <h3 class="duty__label">企劃</h3>
+              <ul class="duty__list">
+                <li>網頁架構</li>
+                <li>文案與素材發想</li>
+              </ul>
+            </section>
+            <section class="duty duty--design">
+              <h3 class="duty__label">設計</h3>
+              <ul class="duty__list">
+                <li>無限修改與迭代</li>
+                <li>RWD 精準調整</li>
+                <li>AI 素材製作</li>
+                <li>導入 AI 工具</li>
+              </ul>
+            </section>
+            <section class="duty duty--dev">
+              <h3 class="duty__label">前端</h3>
+              <ul class="duty__list">
+                <li>特殊動態效果</li>
+                <li>流暢的使用者體驗</li>
+                <li>多語系與後台架構</li>
+              </ul>
+            </section>
+          </div>
+
+          <section class="duty duty--pm">
+            <h3 class="duty__label">PM</h3>
+            <ul class="duty__list">
+              <li>時程規劃</li>
+              <li>建立協作流程</li>
+              <li>覆盤問題、提出對策</li>
+            </ul>
+          </section>
         </div>
       </section>
     </div>

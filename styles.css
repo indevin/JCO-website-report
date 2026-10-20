@@ -43,11 +43,37 @@
 
   --ui-shadow: inset -4px -4px 8px 0 rgba(255, 255, 255, 0.1),
     inset 4px 4px 12px 0 rgba(255, 255, 255, 0.2);
+
+  /* MapleStory cursors (github.com/zaytri/maplestory-cursors) */
+  --cursor-point: url("assets/cursors/point.png") 0 0, auto;
+  --cursor-click: url("assets/cursors/point-click-1.png") 4 4, pointer;
 }
 
 * {
   box-sizing: border-box;
 }
+
+html { cursor: var(--cursor-point); }
+
+a,
+button { cursor: var(--cursor-click); }
+
+/* Over something clickable, stage.js hides the native cursor and animates .maple-cursor instead */
+html.is-cursor-clicking,
+html.is-cursor-clicking * { cursor: none !important; }
+
+.maple-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2147483647;
+  display: none;
+  width: 48px;
+  height: 48px;
+  pointer-events: none;
+}
+
+html.is-cursor-clicking .maple-cursor { display: block; }
 
 html,
 body {
@@ -280,6 +306,23 @@ p {
   align-items: flex-start;
 }
 
+.timeline__col--loose { gap: 40px; }
+
+/* Consequence note under a card: red warning sign + one line */
+.warn {
+  display: flex;
+  gap: 16px;
+  align-items: center;
+  font: 500 24px var(--font-body);
+  color: var(--ink-900);
+  white-space: nowrap;
+}
+
+.warn img {
+  display: block;
+  flex: none;
+}
+
 .timeline__tags {
   display: flex;
   gap: 20px;
@@ -467,6 +510,86 @@ ul.card__body li {
 .nametag--dong   { left: 443px; top: 201px; }
 .nametag--milk   { left: 625px; top: 201px; }
 
+/* ---------- Start screen (built by stage.js) ---------- */
+html.has-intro body { overflow: hidden; }
+
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  overflow: hidden;
+  background: var(--sky-bottom);
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.intro.is-leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Exactly one viewport, in design px: the 1080px height is fitted by --scale */
+.intro__scene {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(100vw / var(--scale));
+  height: var(--stage-h);
+  background: linear-gradient(to bottom, var(--sky-top) 0%, var(--sky-bottom) 64.682%);
+  transform: scale(var(--scale));
+  transform-origin: 0 0;
+}
+
+.intro__joy {
+  position: absolute;
+  left: 120px;
+  top: 122px;
+  width: 500px;
+  height: 571px;
+  object-fit: cover;
+  transform: scaleX(-1);
+}
+
+.intro__joy-tag {
+  left: 361px;
+  top: 707px;
+}
+
+.intro__team {
+  left: 80px;
+  top: 729px;
+}
+
+.intro__team .team__sprite--bamboo { mix-blend-mode: darken; }
+
+/* Raised 3D key; pressing flips its light so it looks pushed in */
+.intro__start {
+  position: absolute;
+  left: calc(50% + 160px); /* 1120px on the 1920px design, kept relative to the centre */
+  top: 435px;
+  padding: 40px 80px;
+  border: 2px solid #844818;
+  border-radius: 12px;
+  background: #e57e2a;
+  box-shadow: inset -4px -4px 8px 0 rgba(255, 255, 255, 0.4),
+    inset 4px 4px 12px 0 rgba(255, 255, 255, 0.4);
+  font: 900 80px "Saira", sans-serif;
+  color: #fff;
+  transition: box-shadow 0.08s, transform 0.08s;
+}
+
+.intro__start:active,
+.intro__start.is-pressed {
+  box-shadow: inset 4px 4px 8px 0 rgba(0, 0, 0, 0.35),
+    inset -4px -4px 12px 0 rgba(255, 255, 255, 0.25);
+  transform: translateY(2px);
+}
+
+.intro__start:focus-visible {
+  outline: 4px solid #fff;
+  outline-offset: 4px;
+}
+
 /* ==================== Screen-paged pages (reflection.html, role.html) ==================== */
 /* Each .screen is one viewport wide (in design px: 100dvw ÷ --scale) */
 .page-reflection,
@@ -505,6 +628,7 @@ ul.card__body li {
   transform-origin: 50% 0;
 }
 
+.page-reflection .screen__content { top: 51px; }
 .page-role .screen__content--center { top: 162px; }
 
 /* …and centred vertically too */
@@ -521,6 +645,8 @@ ul.card__body li {
   left: 50%; /* centred over the panels */
   top: 0;
   translate: -50% 0;
+  scale: var(--title-fit, 1); /* shrunk on its own when it would run under the nav (reflection.html) */
+  transform-origin: 50% 0;
   margin: 0;
   font: 400 100px var(--font-pixel);
   letter-spacing: 2px;
@@ -549,11 +675,13 @@ ul.card__body li {
 }
 
 .panels {
-  margin-top: 215px; /* 249px from the top of the stage */
+  margin-top: 228px; /* 279px from the top of the stage */
   display: flex;
-  gap: 80px;
+  gap: 40px;
   align-items: flex-start;
 }
+
+.panels--tcg { margin-top: 246px; } /* 297px */
 
 /* Numbered summary panel */
 .panel {
@@ -592,6 +720,13 @@ ul.card__body li {
   font: 900 48px var(--font-date);
 }
 
+/* Dark titles get a 2px white outline (the stroke is 4px, half of it hidden behind the fill) */
+.panel--lesson .panel__title,
+.panel--goal .panel__title {
+  -webkit-text-stroke: 4px #fff;
+  paint-order: stroke fill;
+}
+
 .panel__list {
   display: flex;
   flex-direction: column;
@@ -617,6 +752,8 @@ ul.card__body li {
   background: var(--num-bg);
   font: 32px var(--font-pixel);
   color: #fff;
+  -webkit-text-stroke: 4px #000; /* 2px black outline around the white digit */
+  paint-order: stroke fill;
 }
 
 /* 1px rule drawn just above a zero-height slot, as in the design */
@@ -670,6 +807,20 @@ ul.card__body li {
 .sheet__title--xb { font-weight: 800; }
 .sheet__title--sm { font-size: 40px; }
 
+/* Title with a smaller line under it */
+.sheet__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+}
+
+.sheet__subtitle {
+  font: 700 24px var(--font-date);
+  color: #fff;
+  white-space: nowrap;
+}
+
 .sheet__body {
   display: flex;
   flex-direction: column;
@@ -712,10 +863,10 @@ ul.card__body li {
 /* ==================== 總結 (summary.html) ==================== */
 .sheet--highlights {
   left: 50%;
-  top: 162px;
+  top: 139px;
   translate: -50% 0; /* centred on the screen */
   width: 1411px;
-  height: 688px;
+  height: 811px;
 }
 
 .sheet--highlights .sheet__body {
@@ -764,10 +915,11 @@ ul.card__body li {
   letter-spacing: 0.56px;
 }
 
-.features {
+.features,
+.features__list {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 40px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -775,16 +927,20 @@ ul.card__body li {
 
 .features--wide { width: 619px; }
 
-/* Fixed row heights as in the design; the 40px text overflows them slightly */
+/* "Bonus" column: a label over its own list */
+.features__label {
+  margin: 0;
+  font: 700 32px var(--font-body);
+  white-space: nowrap;
+}
+
 .feature {
   display: flex;
   gap: 8px;
   align-items: flex-start;
-  height: 48px;
 }
 
-.feature--sub  { height: 88px; }
-.feature--auto { height: auto; }
+.feature--lg { height: 88px; } /* fixed height as in the design; the 40px name overflows it slightly */
 
 .feature__icon {
   display: block;
@@ -792,8 +948,7 @@ ul.card__body li {
   margin-top: 4px;
 }
 
-.feature--center { align-items: center; }
-.feature--center .feature__icon { margin-top: 0; }
+.feature--flush .feature__icon { margin-top: 0; }
 
 .feature__text {
   display: flex;
@@ -803,7 +958,8 @@ ul.card__body li {
   white-space: nowrap;
 }
 
-.feature__name { font: 700 40px var(--font-body); }
+.feature__name { font: 700 36px var(--font-body); }
+.feature--lg .feature__name { font-size: 40px; }
 .feature__note { font: 500 24px var(--font-body); }
 
 /* ==================== 歷程 (index.html): last timeline item ==================== */
@@ -825,42 +981,17 @@ ul.card__body li {
 /* ==================== 角色定位 (role.html) ==================== */
 /* Placed by their .screen__content rather than on the stage */
 .sheet--compare,
-.sheet--company {
+.sheet--duties {
   position: relative;
 }
 
-.sheet--compare { width: 1187px; }
-.sheet--company { width: 598px; }
+.sheet--compare { width: 1224px; }
 
-.page-role .screen__content--company { top: 210px; }
+.sheet--duties { width: 1640px; }
 
-/* Circles sized by how much each value matters */
-.values {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+.sheet--duties .sheet__body { gap: 40px; }
 
-.values__item {
-  display: flex;
-  flex: none;
-  align-items: center;
-  justify-content: center;
-  width: 80px;
-  height: 80px;
-  padding: 10px;
-  border: 1px solid #000;
-  border-radius: 9999px;
-  background: #fff;
-  font: 700 20px var(--font-body);
-  white-space: nowrap;
-}
-
-.values__item--md { width: 120px; height: 120px; }
-.values__item--lg { width: 160px; height: 160px; }
+.page-role .screen__content--duties { top: 155px; }
 
 .compare-row {
   display: flex;
@@ -880,6 +1011,11 @@ ul.card__body li {
   min-width: 1px;
 }
 
+.compare-row__head--me {
+  flex: none;
+  width: 400px;
+}
+
 .compare-row__cell {
   display: flex;
   flex: 1 0 0;
@@ -891,30 +1027,95 @@ ul.card__body li {
   white-space: nowrap;
 }
 
+/* The "Me" column is a fixed width; the agency column takes the rest */
+.compare-row__label + .compare-row__cell {
+  flex: none;
+  width: 360px;
+}
+
 .compare-row__cell img {
   display: block;
   flex: none;
 }
 
-/* Company perk: label + centred tick / cross */
-.perk {
+/* 貢獻: the four disciplines left → right in workflow order, PM as a strip under all of them */
+.duties {
   display: flex;
-  gap: 20px;
-  align-items: center;
-  font: 700 24px var(--font-body);
+  gap: 40px;
+  align-items: stretch;
+}
+
+.duty {
+  --duty-tint: color-mix(in srgb, var(--duty-bg) 22%, #fff);
+  display: flex;
+  flex: 1 0 0;
+  flex-direction: column;
+  min-width: max-content; /* equal columns, but never narrower than their longest item */
+  overflow: clip;
+  border: 2px solid #191919;
+  border-radius: 12px;
+  background: var(--duty-tint);
+}
+
+.duty__label {
+  margin: 0;
+  padding: 16px 24px;
+  border-bottom: 2px solid #191919;
+  background: var(--duty-bg);
+  font: 900 32px var(--font-date);
   white-space: nowrap;
 }
 
-.perk__label { flex: 1 0 0; }
+.duty--brand  { --duty-bg: #f2d58b; }
+.duty--plan   { --duty-bg: #d8f28b; }
+.duty--design { --duty-bg: #8be6f2; }
+.duty--dev    { --duty-bg: #b998eb; }
+.duty--pm     { --duty-bg: #f2a58b; }
 
-.perk__mark {
+.duty__list {
   display: flex;
-  flex: none;
-  justify-content: center;
-  width: 120px;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding: 24px 20px;
+  list-style: none;
+  font: 500 24px var(--font-body);
 }
 
-.perk__mark img { display: block; }
+.duty__list li {
+  position: relative;
+  padding-left: 22px;
+  white-space: nowrap;
+}
+
+/* Round bullet in the column colour, centred on the first line */
+.duty__list li::before {
+  content: "";
+  position: absolute;
+  left: 4px;
+  top: calc(0.65em - 2.5px);
+  width: 5px;
+  height: 5px;
+  border: 1px solid #191919;
+  border-radius: 50%;
+  background: var(--duty-bg);
+}
+
+/* PM: label on the left, items in one row */
+.duty--pm { flex-direction: row; }
+
+.duty--pm .duty__label {
+  display: flex;
+  align-items: center;
+  border-right: 2px solid #191919;
+  border-bottom: 0;
+}
+
+.duty--pm .duty__list {
+  flex-direction: row;
+  gap: 48px;
+  align-items: center;
+}
 
 /* Job title cards: current → arrow → proposed */
 .jobs {
@@ -987,4 +1188,141 @@ ul.card__body li {
   display: block;
   flex: none;
   margin-top: 366.453px;
+}
+
+/* ==================== Timeline entrance (index.html) ==================== */
+/* Items wait out of sight until their left edge crosses the reveal line (30% of the viewport, index.html), then rise in.
+   `backwards` fill: once played, the item goes back to its own styles (so glass blur keeps working) */
+.timeline.has-reveal > li:not(.is-in) { visibility: hidden; }
+
+.timeline.has-reveal > li.is-in { animation: timeline-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+
+@keyframes timeline-in {
+  from { opacity: 0; transform: translateY(80px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline.has-reveal > li.is-in { animation: none; }
+}
+
+/* ==================== Photo viewer (index.html) ==================== */
+/* Timeline items open the viewer */
+.timeline .is-openable {
+  cursor: var(--cursor-click);
+  transition: translate 0.15s ease-out;
+}
+
+.timeline .is-openable:hover { translate: 0 -6px; }
+
+.timeline .is-openable:focus-visible {
+  outline: 4px solid var(--section-current);
+  outline-offset: 8px;
+  border-radius: 12px;
+}
+
+/* Sized in design px (--u) so it scales with the page; same look as the report sheets */
+.modal {
+  --u: calc(var(--scale) * 1px);
+  width: min(90vw, calc(1600 * var(--u)));
+  max-width: none;
+  max-height: 90vh;
+  padding: 0;
+  border: 0;
+  background: none;
+  overflow: visible;
+}
+
+.modal::backdrop {
+  background: rgba(10, 14, 20, 0.6);
+  backdrop-filter: blur(4px);
+}
+
+.modal[open] { animation: modal-in 0.25s ease-out; }
+
+@keyframes modal-in {
+  from { opacity: 0; translate: 0 calc(24 * var(--u)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal[open] { animation: none; }
+  .timeline .is-openable { transition: none; }
+}
+
+.modal__sheet {
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: clip;
+  border: calc(2 * var(--u)) solid #191919;
+  border-radius: calc(20 * var(--u));
+  background: #fff;
+}
+
+.modal__head {
+  display: flex;
+  flex: none;
+  gap: calc(20 * var(--u));
+  align-items: center;
+  justify-content: space-between;
+  padding: calc(20 * var(--u)) calc(40 * var(--u));
+  background: #181818;
+}
+
+.modal__title {
+  margin: 0;
+  overflow: hidden;
+  font: 900 calc(48 * var(--u)) var(--font-date);
+  color: #fff;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* Close button: a dark glass square like the revision tags */
+.modal__close {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: calc(56 * var(--u));
+  height: calc(56 * var(--u));
+  padding: 0;
+  border: 1px solid var(--dark-border);
+  border-radius: calc(12 * var(--u));
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: var(--ui-shadow);
+  color: #fff;
+  cursor: var(--cursor-click);
+}
+
+.modal__close:hover { background: rgba(255, 255, 255, 0.2); }
+
+.modal__close:focus-visible {
+  outline: 3px solid var(--accent-count);
+  outline-offset: 2px;
+}
+
+.modal__close svg {
+  width: calc(28 * var(--u));
+  height: calc(28 * var(--u));
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.modal__body {
+  display: flex;
+  flex-direction: column;
+  gap: calc(20 * var(--u));
+  padding: calc(40 * var(--u));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.modal__photo {
+  display: block;
+  align-self: center;
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #000;
+  border-radius: calc(8 * var(--u));
 }
