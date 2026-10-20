@@ -108,7 +108,7 @@
 
           <li class="days" aria-label="5 天後">5</li>
 
-          <li class="timeline__col" data-photos="首頁四款提案.png">
+          <li class="timeline__col" data-photos="首頁四款提案-大.jpg" data-photo-fill>
             <div class="card glass">
               <p class="card__title"><span>0707</span><span>會議</span></p>
               <ul class="card__body">
@@ -695,14 +695,15 @@
         return parts.length ? parts.join(" ") : title.textContent.trim();
       }
 
-      // Photos show at PHOTO_SCALE of their original size, never wider than the viewer
+      // Photos show at PHOTO_SCALE of their original size, never wider than the viewer;
+      // an item with data-photo-fill shows them at the viewer's full width instead
       const PHOTO_SCALE = 0.7;
 
-      function photo(src) {
+      function photo(src, fill) {
         const img = new Image();
         img.className = "modal__photo";
         img.onload = () => {
-          img.style.width = `${img.naturalWidth * PHOTO_SCALE}px`;
+          img.style.width = fill ? "100%" : `${img.naturalWidth * PHOTO_SCALE}px`;
         };
         img.src = src;
         img.alt = "";
@@ -720,7 +721,8 @@
       function openPhotos(item) {
         modalTitle.textContent = titleOf(item);
         // Images load only when the viewer opens, so the big screenshots never slow the page down
-        modalBody.replaceChildren(...photosOf(item).map(photo));
+        const fill = "photoFill" in item.dataset;
+        modalBody.replaceChildren(...photosOf(item).map((src) => photo(src, fill)));
         modal.showModal();
         modalBody.scrollTop = 0;
       }
