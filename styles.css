@@ -289,10 +289,10 @@ p {
 /* ---------- Timeline ---------- */
 .timeline {
   position: absolute;
-  left: 40px;
+  left: 80px; /* same as STEP_INSET (stage.js) and END_PADDING (index.html) */
   top: 165px;
   display: flex;
-  gap: 40px;
+  gap: 80px;
   align-items: flex-start;
   margin: 0;
   padding: 0;

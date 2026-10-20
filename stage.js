@@ -4,7 +4,7 @@
 // <body data-paging="sections">  wheel and keys jump a whole step (one step = one screen)
 // <body> (default)               wheel scrolls freely; keys line the next step up with the left edge
 const DESIGN_HEIGHT = 1080;
-const STEP_INSET = 40; // design px between the screen's left edge and a step, in the default mode
+const STEP_INSET = 80; // design px between the screen's left edge and a step, in the default mode
 
 const pagedBySection = document.body.dataset.paging === 'sections';
 
